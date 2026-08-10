@@ -2,8 +2,12 @@
 
 
 def checkout_lines(quote: dict[str, int]) -> list[str]:
-    return [
+    lines = [
         f"Subtotal: {quote['subtotal']}",
         f"Shipping: {quote['shipping']}",
-        f"Total: {quote['total']}",
     ]
+    discount = quote.get("discount_amount", 0)
+    if discount:
+        lines.append(f"Discount: {discount}")
+    lines.append(f"Total: {quote['total']}")
+    return lines
