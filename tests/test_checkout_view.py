@@ -26,6 +26,20 @@ class CheckoutViewTest(unittest.TestCase):
             ["Subtotal: 80", "Shipping: 5", "Total: 85"],
         )
 
+    def test_free_shipping_at_threshold(self):
+        """小计达到200时，运费免收并显示已免运费"""
+        self.assertEqual(
+            checkout_lines({"subtotal": 200, "shipping": 0, "total": 200}),
+            ["Subtotal: 200", "Shipping: 已免运费", "Total: 200"],
+        )
+
+    def test_free_shipping_above_threshold(self):
+        """小计超过200时，运费免收并显示已免运费"""
+        self.assertEqual(
+            checkout_lines({"subtotal": 350, "shipping": 0, "total": 350}),
+            ["Subtotal: 350", "Shipping: 已免运费", "Total: 350"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
