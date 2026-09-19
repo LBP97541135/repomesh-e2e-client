@@ -6,6 +6,9 @@ def checkout_lines(quote: dict[str, int]) -> list[str]:
         f"Subtotal: {quote['subtotal']}",
         f"Shipping: {quote['shipping']}",
     ]
+    tax = quote.get("tax", 0)
+    if tax:
+        lines.append(f"Tax: {tax}")
     discount = quote.get("discount_amount", 0)
     if discount:
         lines.append(f"Discount: {discount}")
