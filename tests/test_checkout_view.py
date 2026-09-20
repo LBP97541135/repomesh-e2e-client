@@ -26,6 +26,14 @@ class CheckoutViewTest(unittest.TestCase):
             ["Subtotal: 80", "Shipping: 5", "Total: 85"],
         )
 
+    def test_free_shipping_1200_displayed(self):
+        self.assertEqual(
+            checkout_lines(
+                {"subtotal": 1500, "shipping": 0, "free_shipping_1200": True, "total": 1500}
+            ),
+            ["Subtotal: 1500", "Shipping: 0", "满1200免运费", "Total: 1500"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
